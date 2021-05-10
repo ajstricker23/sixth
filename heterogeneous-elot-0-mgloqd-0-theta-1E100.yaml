@@ -1,0 +1,100 @@
+mesh: 
+  Z: 170.0
+  R: 70.0
+  dz: 10.0
+  dr: 5.0
+  dt: 0.05
+  T: 40.0
+  recirculation Z: 350.0
+
+geometry:
+  background: fuel salt
+  region:
+    material: moderator
+    inner-r: 10.0
+    outer-r: 20.0
+    upper-z: 170.0
+    lower-z: 0.0
+  region:
+    material: moderator
+    inner-r: 30.0
+    outer-r: 40.0
+    upper-z: 170.0
+    lower-z: 0.0
+  region:
+    material: moderator
+    inner-r: 50.0
+    outer-r: 60.0
+    upper-z: 170.0
+    lower-z: 0.0
+
+delayed neutron precursors:
+   betas: [2.11E-4,14.02E-4,12.54E-4,25.28E-4,7.40E-4,2.70E-4]
+   lambdas: [0.0124,0.0305,0.111,0.301,1.14,3.01]
+
+materials:
+  fuel salt:
+    sigT: [10.0,10.0]
+    sigF: [0.0,5.0]
+    sigS: [9.99,0.01,
+           0.0,5.0]
+    nuFile: custom_fuel_NU.yaml 
+    neutV: [1000000,220000]
+    chiP: [1.0,0.0]
+    chiD: [1.0,0.0]
+    density: 2.146E-3
+    cP: 1967.0 
+    k: 0.0553
+    gamma: 0.0
+    omega: 3.204E-11
+    material velocity: 21.45
+    stationary: false
+
+  moderator:
+    sigT: [10.0,10.0]
+    sigF: [0.0,0.0]
+    sigS: [9.9,0.1,
+           0.0,10.0]
+    nu: [0,0]
+    neutV: [1000000,220000]
+    chiP: [0.0,0.0]
+    chiD: [0.0,0.0]
+    density: 1.86E-3
+    cP: 1760
+    k: 0.312
+    gamma: 0.0114
+    omega: 0.0
+    material velocity: 0.0
+    stationary: true
+
+parameters:
+  epsAlpha: 1E-3
+  epsFlux: 1E-5
+  epsFissionSource: 1E-5
+  epsEddington: 1E-6
+  upperBC: [0.0]
+  lowerBC: [0.0]
+  outerBC: [0.0]
+  initial flux: [1.0E10,1.0E10]
+  initial alpha: [1E-15] 
+  initial previous flux: [1.0E10,1.0E10]
+  initial dnp concentration: 0.0
+  initial recirc dnp concentration: 0.0
+  solve type: transient
+  wallTemp: 920
+  inletTemp: 920
+  uniform flow velocity: 21.45
+  mgqd-bcs: goldin
+  epsMPQD: 1E-8
+  ratedPower: 10E6
+  iterativeELOT: false
+  preconditionerELOT: ilu
+  iterativeMGLOQD: false 
+  preconditionerMGLOQD: ilu
+  verbose: false
+  outputEveryNSteps: 600
+  petsc: false
+  relaxTolELOT: 0
+  relaxTolMGLOQD: 0
+  resetThreshold: 1E100
+  outputDirectory: elot-0-mgloqd-0-theta-1E100/
